@@ -29,6 +29,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigate() async {
-    Navigator.pushNamed(context, Routes.home);
+    Navigator.pushReplacementNamed(context, Routes.home);
   }
 }
