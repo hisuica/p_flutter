@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:p_flutter/ui/music/music_list.dart';
+import 'package:p_flutter/ui/my_page/my_page.dart';
+import 'package:p_flutter/ui/photo/photo.dart';
+import 'package:p_flutter/ui/search/search.dart';
 
 class HomeScreen extends StatefulWidget {
+  final navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
+  final PageStorageBucket bucket = PageStorageBucket();
   int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget> [
-    Text(
-      'ミュージック表示中',
-      style: optionStyle,
+
+  final List<Widget> pages = [
+    MusicListScreen(
+      key: PageStorageKey('Music')
     ),
-    Text(
-      '検索表示中',
-      style: optionStyle,
+    SearchScreen(
+      key: PageStorageKey('Search')
     ),
-    Text(
-      '写真表示中',
-      style: optionStyle,
+    PhotoScreen(
+      key: PageStorageKey('Photo')
     ),
-    Text(
-      'マイペイジ表示中',
-      style: optionStyle,
+    MyPageScreen(
+      key: PageStorageKey('MyPage')
     )
   ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -40,39 +41,39 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Flutter Practice'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _widgetOptions.elementAt(_selectedIndex)
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.audiotrack),
-            title: Text('Music'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text('Search'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.photo),
-            title: Text('Photo'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.face),
-            title: Text('My Page'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.black54,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
-      ),
+      body: _buildBody(),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
+
+  Widget _buildBody() => PageStorage(
+    child: pages[_selectedIndex], 
+    bucket: bucket,
+    );
+
+  Widget _buildBottomNavigationBar(context) => BottomNavigationBar(
+    showUnselectedLabels: true,
+    items: const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(Icons.audiotrack),
+        title: Text('Music'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.search),
+        title: Text('Search'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.photo),
+        title: Text('Photo'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.face),
+        title: Text('My Page'),
+      ),
+    ],
+    currentIndex: _selectedIndex,
+    unselectedItemColor: Colors.black54,
+    selectedItemColor: Colors.blue,
+    onTap: _onItemTapped,
+  );
 }
