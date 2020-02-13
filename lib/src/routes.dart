@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:p_flutter/ui/home/home.dart';
-import 'package:p_flutter/ui/music/music_list.dart';
-import 'package:p_flutter/ui/my_page/my_page.dart';
-import 'package:p_flutter/ui/photo/photo.dart';
-import 'package:p_flutter/ui/search/search.dart';
-import 'package:p_flutter/ui/splash/splash.dart';
+import 'package:p_flutter/src/ui/home/home.dart';
+import 'package:p_flutter/src/ui/music/music_list.dart';
+import 'package:p_flutter/src/ui/my_page/my_page.dart';
+import 'package:p_flutter/src/ui/photo/photo.dart';
+import 'package:p_flutter/src/ui/search/search.dart';
+import 'package:p_flutter/src/ui/splash/splash.dart';
 
 class Routes {
   Routes._();

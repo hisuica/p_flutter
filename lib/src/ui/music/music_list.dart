@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p_flutter/widget/app_icon_widget.dart';
+import 'package:p_flutter/src/widget/app_icon_widget.dart';
 
 class MusicListScreen extends StatefulWidget {
   const MusicListScreen({Key key}) : super(key: key);
