@@ -1,14 +1,4 @@
 class TopSongsModel {
-  _Feed _feed;
-
-  TopSongsModel.fromJson(Map<String, dynamic> parsedJson) {
-    _feed = parsedJson['feed'];
-  }
-
-  _Feed get feed => _feed;
-}
-
-class _Feed {
   String _title;
   String _id;
   String _copyright;
@@ -16,17 +6,16 @@ class _Feed {
   String _icon;
   String _updated;
   List<_Result> _results = [];
-
-  _Feed(feed) {
-    _title = feed['title'];
-    _id = feed['id'];
-    _copyright = feed['copyright'];
-    _country = feed['country'];
-    _icon = feed['icon'];
-    _updated = feed['updated'];
+  TopSongsModel.fromJson(Map<String, dynamic> parsedJson) {
+    _title = parsedJson['feed']['title'];
+    _id = parsedJson['feed']['id'];
+    _copyright = parsedJson['feed']['copyright'];
+    _country = parsedJson['feed']['country'];
+    _icon = parsedJson['feed']['icon'];
+    _updated = parsedJson['feed']['updated'];
     List<_Result> temp = [];
-    for (int i = 0; i < feed['results'].length; i++) {
-      _Result result = _Result(feed['results'][i]);
+    for (int i = 0; i < parsedJson['feed']['results'].length; i++) {
+      _Result result = _Result(parsedJson['feed']['results'][i]);
       temp.add(result);
     }
     _results = temp;
